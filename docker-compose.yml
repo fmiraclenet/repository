@@ -12,6 +12,7 @@ services:
 #        MYSQL_DATABASE: gitbucket
     volumes:
       - ./mysql/sql:/docker-entrypoint-initdb.d
+      - ./mysql/scripts:/tmp/scripts
       - repository_mysql:/var/lib/mysql
     ports:
       - "3306:3306"

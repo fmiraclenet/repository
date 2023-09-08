@@ -6,6 +6,7 @@ services:
   mysql:
     build: ./mysql
     environment:
+        MYSQL_ROOT_USER: root
         MYSQL_ROOT_PASSWORD: root
 #        MYSQL_USER: gitbucket
 #        MYSQL_PASSWORD: gitbucket
@@ -19,7 +20,6 @@ services:
     restart: always
   gitbucket:
     build: ./gitbucket
-    restart: always
     ports:
       - 8080:8080
       - 29418:29418

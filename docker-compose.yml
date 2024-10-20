@@ -12,7 +12,7 @@ services:
 #        MYSQL_PASSWORD: gitbucket
 #        MYSQL_DATABASE: gitbucket
     volumes:
-      - ./mysql/sql:/docker-entrypoint-initdb.d
+      - ./mysql/sql:/docker-entrypoint-initdb.d/
       - ./mysql/scripts:/tmp/scripts
       - repository_mysql:/var/lib/mysql
     ports:
@@ -29,7 +29,8 @@ services:
     depends_on:
       - mysql
     environment:
-      - GITBUCKET_DB_URL=jdbc:mysql://mysql/gitbucket?useUnicode=true&characterEncoding=utf8
+      - GITBUCKET_DB_URL=jdbc:mysql://mysql/gitbucket?useUnicode=true&characterEncoding=utf8&allowPublicKeyRetrieval=true&useSSL=false
+#      - GITBUCKET_DB_URL=jdbc:mysql://mysql/gitbucket?useUnicode=true&characterEncoding=utf8
       - GITBUCKET_DB_USER=gitbucket
       - GITBUCKET_DB_PASSWORD=gitbucket
     command: ["/gitbucket/script/wait-for-it.sh", "mysql:3306", "--", "java", "-jar", "/opt/gitbucket.war"]
